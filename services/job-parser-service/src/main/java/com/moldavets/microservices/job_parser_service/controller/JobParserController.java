@@ -32,7 +32,7 @@ public class JobParserController {
 
     @GetMapping("/{tech}")
     public List<SkillStatDto> getJob(@PathVariable(value = "tech") String tech,
-                                      @RequestParam(value = "level",required = false) String level) {
+                                     @RequestParam(value = "level") String level) {
 
         List<SkillStat> skillStatList = skillStatService.getByTechAndLevelAndDate(tech, level, LocalDate.now());
 
@@ -47,7 +47,6 @@ public class JobParserController {
             skillStatList = skillStatService.getByTechAndLevelAndDate(tech, level, LocalDate.now());
         }
         return skillStatDtoFactory.createSkillStatDtoList(skillStatList);
-
     }
 
 }

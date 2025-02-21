@@ -1,5 +1,8 @@
 package com.moldavets.microservices.job_parser_service.service.Impl;
 
+import com.moldavets.microservices.job_parser_service.exception.LevelNotFoundException;
+import com.moldavets.microservices.job_parser_service.exception.LostConnectionException;
+import com.moldavets.microservices.job_parser_service.exception.TechNotFoundException;
 import com.moldavets.microservices.job_parser_service.service.JobScraperService;
 import com.moldavets.microservices.job_parser_service.util.LevelEnum;
 import com.moldavets.microservices.job_parser_service.util.TechEnum;
@@ -20,18 +23,15 @@ import java.util.Map;
 @NoArgsConstructor
 public class JobScraperServiceImpl implements JobScraperService {
 
-    //todo skip if cannot open URL
-
     private static final String JUST_JOIN_IT_PATH = "https://justjoin.it";
+
 
     public Map<String,Integer> parse(String tech, String level) {
 
         String URL = getUrlWithParams(tech, level);
-
-        List<String> jobLinks = getJobLinks(URL);
         Map<String,Integer> rateMap = new HashMap<>();
 
-        for (String tempJob : jobLinks) {
+        for (String tempJob : getJobLinks(URL)) {
             for(String tempSkill : getSkills("https://justjoin.it" + tempJob)) {
 
                 if(rateMap.containsKey(tempSkill)) {
@@ -58,8 +58,7 @@ public class JobScraperServiceImpl implements JobScraperService {
 
             return jobSkills;
         } catch (IOException e) {
-            //todo custom exception
-            throw new RuntimeException(e);
+            throw new LostConnectionException(e.getMessage());
         }
     }
 
@@ -74,8 +73,7 @@ public class JobScraperServiceImpl implements JobScraperService {
         try {
             TechEnum techEnum = TechEnum.valueOf(tech.toUpperCase());
         } catch (IllegalArgumentException e) {
-            throw new RuntimeException("Invalid tech: " + tech);
-            //todo exception
+            throw new TechNotFoundException(e.getMessage());
         }
 
         if(level == null) {
@@ -86,8 +84,7 @@ public class JobScraperServiceImpl implements JobScraperService {
             try {
                 LevelEnum levelEnum = LevelEnum.valueOf(level.toUpperCase());
             } catch (IllegalArgumentException e) {
-                throw new RuntimeException("Invalid level: " + level);
-                //todo exception
+                throw new LevelNotFoundException(e.getMessage());
             }
 
             URL.append("/")
@@ -114,7 +111,7 @@ public class JobScraperServiceImpl implements JobScraperService {
             return jobLinks;
 
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new LostConnectionException(e.getMessage());
         }
     }
 }
