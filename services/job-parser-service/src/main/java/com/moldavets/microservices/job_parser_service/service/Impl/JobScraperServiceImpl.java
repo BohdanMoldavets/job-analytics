@@ -1,8 +1,8 @@
 package com.moldavets.microservices.job_parser_service.service.Impl;
 
 import com.moldavets.microservices.job_parser_service.service.JobScraperService;
-import com.moldavets.microservices.job_parser_service.utils.LevelEnum;
-import com.moldavets.microservices.job_parser_service.utils.TechEnum;
+import com.moldavets.microservices.job_parser_service.util.LevelEnum;
+import com.moldavets.microservices.job_parser_service.util.TechEnum;
 import lombok.NoArgsConstructor;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

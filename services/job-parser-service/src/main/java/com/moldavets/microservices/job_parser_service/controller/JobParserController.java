@@ -6,11 +6,9 @@ import com.moldavets.microservices.job_parser_service.factory.SkillStatDtoFactor
 import com.moldavets.microservices.job_parser_service.service.JobScraperService;
 import com.moldavets.microservices.job_parser_service.service.SkillStatService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -32,37 +30,24 @@ public class JobParserController {
         this.skillStatDtoFactory = skillStatDtoFactory;
     }
 
-    //job-parser-service/java?level=junior
     @GetMapping("/{tech}")
-    public Map<String,Integer> getJob(@PathVariable(value = "tech") String tech,
+    public List<SkillStatDto> getJob(@PathVariable(value = "tech") String tech,
                                       @RequestParam(value = "level",required = false) String level) {
 
+        List<SkillStat> skillStatList = skillStatService.getByTechAndLevelAndDate(tech, level, LocalDate.now());
 
-        Map<String, Integer> resultList;
+        if(skillStatList.isEmpty()) {
+            Map<String, Integer> rateMap = jobScraperService.parse(tech, level);
 
-        //retrieve from db if exist
-        Map<String, Integer> retrieveResult ;
-
-        //for new requests
-        resultList = jobScraperService.parse(tech, level);
-
-        skillStatService.saveAll(resultList, tech, level);
-
-        return resultList;
-    }
-
-    @GetMapping("/test/{tech}")
-    public List<SkillStatDto> getJobtest(@PathVariable(value = "tech") String tech,
-                                  @RequestParam(value = "level",required = false) String level) {
-
-
-        List<SkillStat> resultList = skillStatService.getByTechAndLevelAndDate(tech, level, LocalDate.now());
-
-        List<SkillStatDto> responseList = new ArrayList<>();
-        for(SkillStat skillStat : resultList) {
-            responseList.add(skillStatDtoFactory.createSkillStatDto(skillStat));
+            skillStatService.saveAll(
+                    rateMap,
+                    tech,
+                    level
+            );
+            skillStatList = skillStatService.getByTechAndLevelAndDate(tech, level, LocalDate.now());
         }
-        return responseList;
+        return skillStatDtoFactory.createSkillStatDtoList(skillStatList);
+
     }
 
 }

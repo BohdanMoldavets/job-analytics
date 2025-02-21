@@ -1,4 +1,4 @@
-package com.moldavets.microservices.job_parser_service.utils;
+package com.moldavets.microservices.job_parser_service.util;
 
 public enum TechEnum {
     AI,
