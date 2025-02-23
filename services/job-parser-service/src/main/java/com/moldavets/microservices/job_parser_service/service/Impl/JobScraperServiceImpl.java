@@ -55,7 +55,7 @@ public class JobScraperServiceImpl implements JobScraperService {
             for (Element tempElement : elements) {
                 jobSkills.add(tempElement.text());
             }
-
+            
             return jobSkills;
         } catch (IOException e) {
             throw new LostConnectionException(e.getMessage());
