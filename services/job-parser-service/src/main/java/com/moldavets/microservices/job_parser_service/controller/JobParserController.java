@@ -2,7 +2,7 @@ package com.moldavets.microservices.job_parser_service.controller;
 
 import com.moldavets.microservices.job_parser_service.dto.SkillStatDto;
 import com.moldavets.microservices.job_parser_service.entity.SkillStat;
-import com.moldavets.microservices.job_parser_service.factory.SkillStatDtoFactory;
+import com.moldavets.microservices.job_parser_service.mapper.SkillStatDtoMapper;
 import com.moldavets.microservices.job_parser_service.service.JobScraperService;
 import com.moldavets.microservices.job_parser_service.service.SkillStatService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,20 +19,20 @@ public class JobParserController {
 
     private JobScraperService jobScraperService;
     private SkillStatService skillStatService;
-    private SkillStatDtoFactory skillStatDtoFactory;
+    private SkillStatDtoMapper skillStatDtoMapper;
 
     @Autowired
     public JobParserController(JobScraperService jobScraperService,
                                SkillStatService skillStatService,
-                               SkillStatDtoFactory skillStatDtoFactory) {
+                               SkillStatDtoMapper skillStatDtoMapper) {
         this.jobScraperService = jobScraperService;
         this.skillStatService = skillStatService;
-        this.skillStatDtoFactory = skillStatDtoFactory;
+        this.skillStatDtoMapper = skillStatDtoMapper;
     }
 
     @GetMapping("/{tech}")
-    public List<SkillStatDto> getJob(@PathVariable(value = "tech") String tech,
-                                     @RequestParam(value = "level") String level) {
+    public List<SkillStatDto> parseSkills(@PathVariable(value = "tech") String tech,
+                                          @RequestParam(value = "level") String level) {
 
         List<SkillStat> skillStatList = skillStatService.getByTechAndLevelAndDate(tech, level, LocalDate.now());
 
@@ -46,7 +46,7 @@ public class JobParserController {
             );
             skillStatList = skillStatService.getByTechAndLevelAndDate(tech, level, LocalDate.now());
         }
-        return skillStatDtoFactory.createSkillStatDtoList(skillStatList);
+        return skillStatDtoMapper.createSkillStatDtoList(skillStatList);
     }
 
 }

@@ -1,4 +1,4 @@
-package com.moldavets.microservices.job_parser_service.factory;
+package com.moldavets.microservices.job_parser_service.mapper;
 
 import com.moldavets.microservices.job_parser_service.dto.SkillStatDto;
 import com.moldavets.microservices.job_parser_service.entity.SkillStat;
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class SkillStatDtoFactory {
+public class SkillStatDtoMapper {
 
     public List<SkillStatDto> createSkillStatDtoList(List<SkillStat> skillStatList) {
         List<SkillStatDto> skillStatDtoList = new ArrayList<>();
