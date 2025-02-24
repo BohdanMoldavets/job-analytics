@@ -35,9 +35,9 @@ public class ReportGeneratorController {
         this.skillMapper = skillMapper;
     }
 
-    @GetMapping("/{tech}")
-    public ResponseEntity<byte[]> getImageById(@PathVariable("tech") String tech,
-                                                    @RequestParam("level") String level) {
+    @GetMapping("/png/{tech}")
+    public ResponseEntity<byte[]> reportGenerator(@PathVariable("tech") String tech,
+                                             @RequestParam("level") String level) {
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "image/png");
@@ -45,13 +45,11 @@ public class ReportGeneratorController {
         ImageEntity storedImageEntity = imageService.getImageById(
                 LocalDate.now() + ":" + tech + ":" + level + ":png"
         );
-        return new ResponseEntity<>(storedImageEntity.getImage(), headers, HttpStatus.OK);
-    }
 
+        if (storedImageEntity != null) {
+            return new ResponseEntity<>(storedImageEntity.getImage(), headers, HttpStatus.OK);
+        }
 
-    @GetMapping("/png/{tech}")
-    public ResponseEntity<?> reportGenerator(@PathVariable("tech") String tech,
-                                             @RequestParam("level") String level) {
         try {
             RestTemplate restTemplate = new RestTemplate();
 
@@ -72,15 +70,14 @@ public class ReportGeneratorController {
             ImageEntity tempEntity =
                     new ImageEntity(
                             LocalDate.now() + String.format(":%s:%s:png", tech, level),
-                            imageGeneratorService.getImageAsByteArray(mappedSkills)
+                            imageGeneratorService.getImageAsByteArray(mappedSkills, tech)
                     );
             imageService.save(tempEntity);
 
+            return new ResponseEntity<>(tempEntity.getImage(), headers, HttpStatus.OK);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
-        //todo
-        return null;
     }
 
 }

@@ -12,18 +12,15 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Map;
 
 @Service
 public class ImageGeneratorServiceImpl implements ImageGeneratorService {
 
-    private final int WIDTH = 1920;
-    private final int HEIGHT = 1080;
-
     @Override
-    public byte[] getImageAsByteArray(Map<String, Integer> skills) {
+    public byte[] getImageAsByteArray(Map<String, Integer> skills, String tech) {
 
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
@@ -32,8 +29,8 @@ public class ImageGeneratorServiceImpl implements ImageGeneratorService {
         }
 
         JFreeChart barChart = ChartFactory.createBarChart(
-                "Analytics",
-                "Tech",
+                "Analytics - " + tech.toUpperCase() + " - " + LocalDate.now().getYear() + "/" + LocalDate.now().getMonth(),
+                "Skills",
                 "Count",
                 dataset
         );
@@ -47,7 +44,7 @@ public class ImageGeneratorServiceImpl implements ImageGeneratorService {
         yAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
 
         try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream()) {
-            ChartUtilities.writeChartAsPNG(outputStream, barChart, WIDTH, HEIGHT);
+            ChartUtilities.writeChartAsPNG(outputStream, barChart, 1920, 1080);
             return outputStream.toByteArray();
         } catch (IOException e) {
             throw new RuntimeException(e);
