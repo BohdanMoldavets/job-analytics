@@ -6,6 +6,7 @@ import com.moldavets.microservices.job_parser_service.exception.TechNotFoundExce
 import com.moldavets.microservices.job_parser_service.service.JobScraperService;
 import com.moldavets.microservices.job_parser_service.util.LevelEnum;
 import com.moldavets.microservices.job_parser_service.util.TechEnum;
+import io.github.resilience4j.retry.annotation.Retry;
 import lombok.NoArgsConstructor;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

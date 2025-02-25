@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.moldavets.microservices.report_generator_service.entity.ImageEntity;
+import com.moldavets.microservices.report_generator_service.exception.HttpClientNotFoundException;
 import com.moldavets.microservices.report_generator_service.mapper.SkillMapper;
 import com.moldavets.microservices.report_generator_service.proxy.JobParserProxy;
 import com.moldavets.microservices.report_generator_service.service.ImageGeneratorService;
@@ -49,7 +50,7 @@ public class ReportGeneratorController {
     public ResponseEntity<byte[]> reportGenerator(@PathVariable("tech") String tech,
                                                   @RequestParam("level") String level) {
 
-        String skillsAnalytics = null;
+        String skillsAnalytics;
         List<Map<String,String>> responseSkills;
 
         HttpHeaders headers = new HttpHeaders();
@@ -74,8 +75,7 @@ public class ReportGeneratorController {
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         } catch (HttpClientErrorException.NotFound e) {
-            //todo all exceptions
-            return null;
+            throw new HttpClientNotFoundException(e.getMessage());
         }
 
         Map<String, Integer> mappedSkills = skillMapper.mapSkills(responseSkills);

@@ -5,6 +5,7 @@ import com.moldavets.microservices.job_parser_service.entity.SkillStat;
 import com.moldavets.microservices.job_parser_service.mapper.SkillStatDtoMapper;
 import com.moldavets.microservices.job_parser_service.service.JobScraperService;
 import com.moldavets.microservices.job_parser_service.service.SkillStatService;
+import io.github.resilience4j.retry.annotation.Retry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,6 +32,7 @@ public class JobParserController {
     }
 
     @GetMapping("/{tech}")
+    @Retry(name = "JobParserController") // todo fallbackMethod
     public List<SkillStatDto> parseSkills(@PathVariable(value = "tech") String tech,
                                           @RequestParam(value = "level") String level) {
 
@@ -48,5 +50,7 @@ public class JobParserController {
         }
         return skillStatDtoMapper.createSkillStatDtoList(skillStatList);
     }
+
+
 
 }
