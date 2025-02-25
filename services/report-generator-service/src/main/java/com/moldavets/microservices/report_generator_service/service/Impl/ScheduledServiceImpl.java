@@ -34,8 +34,8 @@ public class ScheduledServiceImpl implements ScheduledService {
     @Override
 //    @Scheduled(timeUnit = TimeUnit.MINUTES,
 //               cron="0 0 4 1 * ?" , initialDelay = 0)
-    @Scheduled(timeUnit = TimeUnit.DAYS,
-               fixedRate = 2, initialDelay = 0) //todo -> delete this coz it's only for test
+//    @Scheduled(timeUnit = TimeUnit.DAYS,
+//               fixedRate = 2, initialDelay = 0) //todo -> delete this coz it's only for test
     public void scheduledDataCollection() {
         LOGGER.info("Data collection started");
         for (String tempJob : itJobs) {

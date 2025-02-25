@@ -1,5 +1,6 @@
 package com.moldavets.microservices.report_generator_service.mapper.Impl;
 
+import com.moldavets.microservices.report_generator_service.exception.IncorrectJsonFormatException;
 import com.moldavets.microservices.report_generator_service.mapper.SkillMapper;
 import org.springframework.stereotype.Component;
 
@@ -20,8 +21,10 @@ public class SkillMapperImpl implements SkillMapper {
 
                 if(key.equals("count")) {
                     tempCount = Integer.parseInt(skill.get(key));
-                } else {
+                } else if (key.equals("skill_name")) {
                     tempSkill = skill.get(key);
+                } else {
+                    throw new IncorrectJsonFormatException("Incorrect Json Format");
                 }
                 mappedSkills.put(tempSkill, tempCount);
             }
