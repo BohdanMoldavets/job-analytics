@@ -5,10 +5,10 @@ import com.moldavets.microservices.report_generator_service.service.ScheduledSer
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -16,6 +16,12 @@ import java.util.concurrent.TimeUnit;
 public class ScheduledServiceImpl implements ScheduledService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ScheduledServiceImpl.class);
+
+    @Value("${it.jobs.tech.list}")
+    private List<String> itJobs;
+
+    @Value("${it.jobs.level.list}")
+    private List<String> itLevels;
 
     private ReportGeneratorController reportGeneratorController;
 
@@ -28,20 +34,18 @@ public class ScheduledServiceImpl implements ScheduledService {
     @Override
 //    @Scheduled(timeUnit = TimeUnit.MINUTES,
 //               cron="0 0 4 1 * ?" , initialDelay = 0)
-    @Scheduled(timeUnit = TimeUnit.MINUTES,
+    @Scheduled(timeUnit = TimeUnit.DAYS,
                fixedRate = 2, initialDelay = 0) //todo -> delete this coz it's only for test
     public void scheduledDataCollection() {
-
-        List<String> list = new ArrayList<>();
-        list.add("ux");
-        list.add("java");
-        list.add("php");
-
-        for (String s : list) {
-            LOGGER.info("Started generation report for " + s);
-            reportGeneratorController.reportGenerator(s, "junior");
-            LOGGER.info("Ended generation report for " + s);
+        LOGGER.info("Data collection started");
+        for (String tempJob : itJobs) {
+            for (String tempLevel : itLevels) {
+                LOGGER.info("Generation report for " + tempJob + "/" + tempLevel);
+                reportGeneratorController.reportGenerator(tempJob, tempLevel);
+                LOGGER.info("Generation report for " + tempJob + "/" + tempLevel + " completed");
+            }
         }
+        LOGGER.info("Data collection ended");
     }
 
 

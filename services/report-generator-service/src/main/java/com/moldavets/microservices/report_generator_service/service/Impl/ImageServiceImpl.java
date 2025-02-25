@@ -24,7 +24,7 @@ public class ImageServiceImpl implements ImageService {
         if (imageEntity.getId() != null) {
             redisTemplate.opsForValue().set(
                     imageEntity.getId(),imageEntity.getImage(),
-                    30,
+                    30, //todo change timeout
                     TimeUnit.DAYS
             );
         }

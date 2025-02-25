@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.moldavets.microservices.report_generator_service.entity.ImageEntity;
 import com.moldavets.microservices.report_generator_service.mapper.SkillMapper;
+import com.moldavets.microservices.report_generator_service.proxy.JobParserProxy;
 import com.moldavets.microservices.report_generator_service.service.ImageGeneratorService;
 import com.moldavets.microservices.report_generator_service.service.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ import java.util.Map;
 @RequestMapping("/report-generator-service")
 public class ReportGeneratorController {
 
+    private JobParserProxy jobParserProxy;
     private SkillMapper skillMapper;
     private ImageService imageService;
     private ImageGeneratorService imageGeneratorService;
@@ -34,15 +36,21 @@ public class ReportGeneratorController {
     @Autowired
     public ReportGeneratorController(ImageService imageService,
                                      ImageGeneratorService imageGeneratorService,
-                                     SkillMapper skillMapper) {
+                                     SkillMapper skillMapper,
+                                     JobParserProxy jobParserProxy) {
         this.imageService = imageService;
         this.imageGeneratorService = imageGeneratorService;
         this.skillMapper = skillMapper;
+        this.jobParserProxy = jobParserProxy;
     }
+
 
     @GetMapping("/png/{tech}")
     public ResponseEntity<byte[]> reportGenerator(@PathVariable("tech") String tech,
                                                   @RequestParam("level") String level) {
+
+        String skillsAnalytics = null;
+        List<Map<String,String>> responseSkills;
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "image/png");
@@ -55,18 +63,8 @@ public class ReportGeneratorController {
             return new ResponseEntity<>(storedImageEntity.getImage(), headers, HttpStatus.OK);
         }
 
-        String skillsAnalytics = null;
-        List<Map<String,String>> responseSkills;
         try {
-            RestTemplate restTemplate = new RestTemplate();
-
-            skillsAnalytics = restTemplate.getForEntity(
-                    String.format(
-                            "http://localhost:8080/job-parser-service/%s?level=%s",
-                            tech,
-                            level
-                    ), String.class ).getBody();
-
+            skillsAnalytics = jobParserProxy.retrieveSkillsJson(tech, level);
 
             responseSkills = new ObjectMapper().readValue(
                     skillsAnalytics,
@@ -80,16 +78,16 @@ public class ReportGeneratorController {
             return null;
         }
 
-            Map<String, Integer> mappedSkills = skillMapper.mapSkills(responseSkills);
+        Map<String, Integer> mappedSkills = skillMapper.mapSkills(responseSkills);
 
-            ImageEntity tempEntity =
-                    new ImageEntity(
-                            LocalDate.now() + String.format(":%s:%s:png", tech, level),
-                            imageGeneratorService.getImageAsByteArray(mappedSkills, tech)
-                    );
-            imageService.save(tempEntity);
+        ImageEntity tempEntity =
+                new ImageEntity(
+                        LocalDate.now() + String.format(":%s:%s:png", tech, level),
+                        imageGeneratorService.getImageAsByteArray(mappedSkills, tech)
+                );
+        imageService.save(tempEntity);
 
-            return new ResponseEntity<>(tempEntity.getImage(), headers, HttpStatus.OK);
+        return new ResponseEntity<>(tempEntity.getImage(), headers, HttpStatus.OK);
 
     }
 
