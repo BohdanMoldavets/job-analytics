@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDate;
@@ -26,6 +28,9 @@ public class ReportGeneratorController {
     private ImageService imageService;
     private ImageGeneratorService imageGeneratorService;
 
+    public ReportGeneratorController() {
+    }
+
     @Autowired
     public ReportGeneratorController(ImageService imageService,
                                      ImageGeneratorService imageGeneratorService,
@@ -37,7 +42,7 @@ public class ReportGeneratorController {
 
     @GetMapping("/png/{tech}")
     public ResponseEntity<byte[]> reportGenerator(@PathVariable("tech") String tech,
-                                             @RequestParam("level") String level) {
+                                                  @RequestParam("level") String level) {
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "image/png");
@@ -50,20 +55,30 @@ public class ReportGeneratorController {
             return new ResponseEntity<>(storedImageEntity.getImage(), headers, HttpStatus.OK);
         }
 
+        String skillsAnalytics = null;
+        List<Map<String,String>> responseSkills;
         try {
             RestTemplate restTemplate = new RestTemplate();
 
-            String skillsAnalytics = restTemplate.getForEntity(
+            skillsAnalytics = restTemplate.getForEntity(
                     String.format(
                             "http://localhost:8080/job-parser-service/%s?level=%s",
                             tech,
                             level
                     ), String.class ).getBody();
 
-            List<Map<String,String>> responseSkills = new ObjectMapper().readValue(
+
+            responseSkills = new ObjectMapper().readValue(
                     skillsAnalytics,
                     new TypeReference<>(){}
             );
+
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        } catch (HttpClientErrorException.NotFound e) {
+            //todo all exceptions
+            return null;
+        }
 
             Map<String, Integer> mappedSkills = skillMapper.mapSkills(responseSkills);
 
@@ -75,9 +90,7 @@ public class ReportGeneratorController {
             imageService.save(tempEntity);
 
             return new ResponseEntity<>(tempEntity.getImage(), headers, HttpStatus.OK);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
+
     }
 
 }

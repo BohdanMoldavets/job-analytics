@@ -80,7 +80,6 @@ public class JobScraperServiceImpl implements JobScraperService {
             URL.append("/")
                .append(tech);
         } else {
-
             try {
                 LevelEnum levelEnum = LevelEnum.valueOf(level.toUpperCase());
             } catch (IllegalArgumentException e) {
