@@ -2,6 +2,7 @@ package com.moldavets.microservices.job_parser_service.controller;
 
 import com.moldavets.microservices.job_parser_service.dto.SkillStatDto;
 import com.moldavets.microservices.job_parser_service.entity.SkillStat;
+import com.moldavets.microservices.job_parser_service.exception.LostConnectionException;
 import com.moldavets.microservices.job_parser_service.mapper.SkillStatDtoMapper;
 import com.moldavets.microservices.job_parser_service.service.JobScraperService;
 import com.moldavets.microservices.job_parser_service.service.SkillStatService;
@@ -32,7 +33,7 @@ public class JobParserController {
     }
 
     @GetMapping("/{tech}")
-    @Retry(name = "JobParserController") // todo fallbackMethod
+    @Retry(name = "JobParserController", fallbackMethod = "fallbackJobParserController")
     public List<SkillStatDto> parseSkills(@PathVariable(value = "tech") String tech,
                                           @RequestParam(value = "level") String level) {
 
@@ -51,6 +52,9 @@ public class JobParserController {
         return skillStatDtoMapper.createSkillStatDtoList(skillStatList);
     }
 
+    private void fallbackJobParserController(Exception e) {
+        throw new LostConnectionException(e.getMessage());
+    }
 
 
 }

@@ -18,46 +18,30 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ExceptionDetailsModel> handleAllExceptions(Exception ex, WebRequest request) {
-        ExceptionDetailsModel exceptionDetails =
-                new ExceptionDetailsModel(
-                        LocalDateTime.now(),
-                        ex.getMessage(),
-                        request.getDescription(false)
-                );
-        return new ResponseEntity<>(exceptionDetails, HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(createExceptionDetailsModel(ex, request), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(LostConnectionException.class)
     public ResponseEntity<ExceptionDetailsModel> handleLostConnectionException(Exception ex, WebRequest request) {
-        ExceptionDetailsModel exceptionDetails =
-                new ExceptionDetailsModel(
-                        LocalDateTime.now(),
-                        ex.getMessage(),
-                        request.getDescription(false)
-                );
-        return new ResponseEntity<>(exceptionDetails, HttpStatus.SERVICE_UNAVAILABLE);
+        return new ResponseEntity<>(createExceptionDetailsModel(ex, request), HttpStatus.SERVICE_UNAVAILABLE);
     }
 
     @ExceptionHandler(TechNotFoundException.class)
     public ResponseEntity<ExceptionDetailsModel> handleTechNotFoundException(Exception ex, WebRequest request) {
-        ExceptionDetailsModel exceptionDetails =
-                new ExceptionDetailsModel(
-                        LocalDateTime.now(),
-                        ex.getMessage(),
-                        request.getDescription(false)
-                );
-        return new ResponseEntity<>(exceptionDetails, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(createExceptionDetailsModel(ex, request), HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(LevelNotFoundException.class)
     public ResponseEntity<ExceptionDetailsModel> handleLevelNotFoundException(Exception ex, WebRequest request) {
-        ExceptionDetailsModel exceptionDetails =
-                new ExceptionDetailsModel(
+        return new ResponseEntity<>(createExceptionDetailsModel(ex, request), HttpStatus.NOT_FOUND);
+    }
+
+    private ExceptionDetailsModel createExceptionDetailsModel(Exception ex, WebRequest request) {
+        return new ExceptionDetailsModel(
                         LocalDateTime.now(),
                         ex.getMessage(),
                         request.getDescription(false)
                 );
-        return new ResponseEntity<>(exceptionDetails, HttpStatus.NOT_FOUND);
     }
 
 

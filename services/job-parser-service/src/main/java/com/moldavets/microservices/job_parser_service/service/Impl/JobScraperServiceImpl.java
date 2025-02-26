@@ -6,7 +6,6 @@ import com.moldavets.microservices.job_parser_service.exception.TechNotFoundExce
 import com.moldavets.microservices.job_parser_service.service.JobScraperService;
 import com.moldavets.microservices.job_parser_service.util.LevelEnum;
 import com.moldavets.microservices.job_parser_service.util.TechEnum;
-import io.github.resilience4j.retry.annotation.Retry;
 import lombok.NoArgsConstructor;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -23,16 +22,13 @@ import java.util.Map;
 @Service
 @NoArgsConstructor
 public class JobScraperServiceImpl implements JobScraperService {
-
-    private static final String JUST_JOIN_IT_PATH = "https://justjoin.it";
-
+    
 
     public Map<String,Integer> parse(String tech, String level) {
 
-        String URL = getUrlWithParams(tech, level);
         Map<String,Integer> rateMap = new HashMap<>();
 
-        for (String tempJob : getJobLinks(URL)) {
+        for (String tempJob : getJobLinks(getUrlWithParams(tech, level))) {
             for(String tempSkill : getSkills("https://justjoin.it" + tempJob)) {
 
                 if(rateMap.containsKey(tempSkill)) {
@@ -45,12 +41,12 @@ public class JobScraperServiceImpl implements JobScraperService {
         return rateMap;
     }
 
-    private List<String> getSkills(String URL) {
+    private List<String> getSkills(String url) {
 
         List<String> jobSkills = new ArrayList<>();
 
         try {
-            Document document = Jsoup.connect(URL).get();
+            Document document = Jsoup.connect(url).get();
             Elements elements = document.select("h4");
 
             for (Element tempElement : elements) {
@@ -65,43 +61,43 @@ public class JobScraperServiceImpl implements JobScraperService {
 
     private String getUrlWithParams(String tech, String level) {
 
-        StringBuilder URL = new StringBuilder();
+        StringBuilder urlBuilder = new StringBuilder();
 
-        URL.append(JUST_JOIN_IT_PATH)
+        urlBuilder.append("https://justjoin.it")
                 .append("/job-offers")
                 .append("/all-locations");
 
         try {
-            TechEnum techEnum = TechEnum.valueOf(tech.toUpperCase());
+            TechEnum.valueOf(tech.toUpperCase());
         } catch (IllegalArgumentException e) {
             throw new TechNotFoundException(e.getMessage());
         }
 
         if(level == null) {
-            URL.append("/")
+            urlBuilder.append("/")
                .append(tech);
         } else {
             try {
-                LevelEnum levelEnum = LevelEnum.valueOf(level.toUpperCase());
+                LevelEnum.valueOf(level.toUpperCase());
             } catch (IllegalArgumentException e) {
                 throw new LevelNotFoundException(e.getMessage());
             }
 
-            URL.append("/")
+            urlBuilder.append("/")
                     .append(tech)
                     .append("?experience-level=")
                     .append(level);
         }
 
-        return URL.toString();
+        return urlBuilder.toString();
     }
 
-    private static List<String> getJobLinks(String URL) {
+    private static List<String> getJobLinks(String url) {
 
         List<String> jobLinks = new ArrayList<>();
 
         try {
-            Elements elements = Jsoup.connect(URL)
+            Elements elements = Jsoup.connect(url)
                     .get()
                     .select("a[href^='/job-offer/']");
 

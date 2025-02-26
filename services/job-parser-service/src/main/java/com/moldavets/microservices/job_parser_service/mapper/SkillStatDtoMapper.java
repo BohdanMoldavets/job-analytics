@@ -20,7 +20,7 @@ public class SkillStatDtoMapper {
     }
 
     public SkillStatDto createSkillStatDto(SkillStat skillStat) {
-        return new SkillStatDto().builder()
+        return SkillStatDto.builder()
                 .skillName(skillStat.getSkillName())
                 .count(skillStat.getCount())
                 .build();
