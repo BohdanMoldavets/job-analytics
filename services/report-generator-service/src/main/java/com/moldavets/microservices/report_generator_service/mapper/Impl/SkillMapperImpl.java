@@ -17,17 +17,21 @@ public class SkillMapperImpl implements SkillMapper {
         for (Map<String, String> skill : skills) {
             String tempSkill = "";
             int tempCount = 0;
-            for (String key : skill.keySet()) {
+
+            for (Map.Entry<String, String> entry : skill.entrySet()) {
+                String key = entry.getKey();
+                String value = entry.getValue();
 
                 if(key.equals("count")) {
-                    tempCount = Integer.parseInt(skill.get(key));
+                    tempCount = Integer.parseInt(value);
                 } else if (key.equals("skill_name")) {
-                    tempSkill = skill.get(key);
+                    tempSkill = value;
                 } else {
                     throw new IncorrectJsonFormatException("Incorrect Json Format");
                 }
                 mappedSkills.put(tempSkill, tempCount);
             }
+
         }
         return mappedSkills;
     }

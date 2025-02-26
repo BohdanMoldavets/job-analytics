@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.moldavets.microservices.report_generator_service.entity.ImageEntity;
 import com.moldavets.microservices.report_generator_service.exception.HttpClientNotFoundException;
 import com.moldavets.microservices.report_generator_service.exception.ImageExistException;
+import com.moldavets.microservices.report_generator_service.exception.ServerMappingException;
 import com.moldavets.microservices.report_generator_service.mapper.SkillMapper;
 import com.moldavets.microservices.report_generator_service.proxy.JobParserProxy;
 import com.moldavets.microservices.report_generator_service.service.ImageGeneratorService;
@@ -77,7 +78,7 @@ public class ReportGeneratorController {
             );
 
         } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
+            throw new ServerMappingException(e.getMessage());
         } catch (HttpClientErrorException.NotFound e) {
             throw new HttpClientNotFoundException(e.getMessage());
         }

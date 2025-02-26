@@ -1,5 +1,6 @@
 package com.moldavets.microservices.report_generator_service.service.Impl;
 
+import com.moldavets.microservices.report_generator_service.exception.ConvertImageException;
 import com.moldavets.microservices.report_generator_service.service.ImageGeneratorService;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartUtilities;
@@ -24,8 +25,10 @@ public class ImageGeneratorServiceImpl implements ImageGeneratorService {
 
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
-        for(String tempSkill : skills.keySet()) {
-            dataset.addValue(skills.get(tempSkill), "Skills", tempSkill);
+        for(Map.Entry<String, Integer> entry : skills.entrySet()) {
+            String key = entry.getKey();
+            Integer value = entry.getValue();
+            dataset.addValue(value, "Skills", key);
         }
 
         JFreeChart barChart = ChartFactory.createBarChart(
@@ -47,7 +50,7 @@ public class ImageGeneratorServiceImpl implements ImageGeneratorService {
             ChartUtilities.writeChartAsPNG(outputStream, barChart, 1920, 1080);
             return outputStream.toByteArray();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new ConvertImageException(e.getMessage());
         }
     }
 }

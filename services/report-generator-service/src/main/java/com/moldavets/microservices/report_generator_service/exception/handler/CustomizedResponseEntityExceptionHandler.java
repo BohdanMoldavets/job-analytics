@@ -1,7 +1,9 @@
 package com.moldavets.microservices.report_generator_service.exception.handler;
 
+import com.moldavets.microservices.report_generator_service.exception.ConvertImageException;
 import com.moldavets.microservices.report_generator_service.exception.HttpClientNotFoundException;
 import com.moldavets.microservices.report_generator_service.exception.IncorrectJsonFormatException;
+import com.moldavets.microservices.report_generator_service.exception.ServerMappingException;
 import com.moldavets.microservices.report_generator_service.exception.model.ExceptionDetailsModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,38 +19,35 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ExceptionDetailsModel> handleAllExceptions(Exception ex, WebRequest request) {
-        ExceptionDetailsModel exceptionDetails =
-                new ExceptionDetailsModel(
-                        LocalDateTime.now(),
-                        ex.getMessage(),
-                        request.getDescription(false)
-                );
-        return new ResponseEntity<>(exceptionDetails, HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(createExceptionDetailsModel(ex, request), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(HttpClientNotFoundException.class)
     public ResponseEntity<ExceptionDetailsModel> handleHttpClientErrorExceptions(Exception ex, WebRequest request) {
-        ExceptionDetailsModel exceptionDetails =
-                new ExceptionDetailsModel(
-                        LocalDateTime.now(),
-                        ex.getMessage(),
-                        request.getDescription(false)
-                );
-        return new ResponseEntity<>(exceptionDetails, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(createExceptionDetailsModel(ex, request), HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(IncorrectJsonFormatException.class)
     public ResponseEntity<ExceptionDetailsModel> handleIncorrectJsonFormatException(Exception ex, WebRequest request) {
-        ExceptionDetailsModel exceptionDetails =
-                new ExceptionDetailsModel(
-                        LocalDateTime.now(),
-                        ex.getMessage(),
-                        request.getDescription(false)
-                );
-        return new ResponseEntity<>(exceptionDetails, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(createExceptionDetailsModel(ex, request), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(ConvertImageException.class)
+    public ResponseEntity<ExceptionDetailsModel> handleConvertImageException(Exception ex, WebRequest request) {
+        return new ResponseEntity<>(createExceptionDetailsModel(ex, request), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
 
+    @ExceptionHandler(ServerMappingException.class)
+    public ResponseEntity<ExceptionDetailsModel> handleServerMappingException(Exception ex, WebRequest request) {
+        return new ResponseEntity<>(createExceptionDetailsModel(ex, request), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 
-
+    private ExceptionDetailsModel createExceptionDetailsModel(Exception ex, WebRequest request) {
+        return new ExceptionDetailsModel(
+                LocalDateTime.now(),
+                ex.getMessage(),
+                request.getDescription(false)
+        );
+    }
 }
