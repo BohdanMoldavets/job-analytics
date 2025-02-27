@@ -23,5 +23,7 @@ public enum TechEnum {
     DATA,
     GO,
     SUPPORT,
-    ERP
+    ERP,
+    ARCHITECTURE,
+    OTHER
 }

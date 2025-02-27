@@ -21,10 +21,6 @@ public class SkillStatServiceImpl implements SkillStatService {
         this.skillStatRepository = skillStatService;
     }
 
-    //todo find by date
-
-
-
     @Override
     public List<SkillStat> getByTechAndLevelAndDate(String tech, String level, LocalDate today) {
         return skillStatRepository.findByTechAndLevelAndLastUpdate(tech, level, today);
