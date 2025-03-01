@@ -12,6 +12,7 @@ import com.moldavets.microservices.report_generator_service.proxy.JobParserProxy
 import com.moldavets.microservices.report_generator_service.service.ImageGeneratorService;
 import com.moldavets.microservices.report_generator_service.service.ImageService;
 import jakarta.annotation.PostConstruct;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -23,6 +24,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 @RestController
 @RequestMapping("/report-generator-service")
 public class ReportGeneratorController {
@@ -78,8 +80,10 @@ public class ReportGeneratorController {
             );
 
         } catch (JsonProcessingException e) {
+            log.error("IN ReportGeneratorController.reportGenerator(): ServerMappingException");
             throw new ServerMappingException(e.getMessage());
         } catch (HttpClientErrorException.NotFound e) {
+            log.error("IN ReportGeneratorController.reportGenerator(): HttpClientErrorException.NotFound");
             throw new HttpClientNotFoundException(e.getMessage());
         }
 
@@ -97,6 +101,7 @@ public class ReportGeneratorController {
         String imagePath = LocalDate.now() + ":" + tech + ":" + level + ":png";
 
         if (imageService.getImageById(imagePath) != null) {
+            log.warn("IN ReportGeneratorController.customReportGenerator(): ImageExistException - {} already exists", imagePath);
             throw new ImageExistException("Image [" + imagePath + "] already exist");
         }
         ImageEntity retrievedImageEntity = mapAndSaveImageEntity(requestBody,tech,level);

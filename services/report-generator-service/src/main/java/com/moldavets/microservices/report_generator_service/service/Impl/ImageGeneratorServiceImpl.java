@@ -2,6 +2,7 @@ package com.moldavets.microservices.report_generator_service.service.Impl;
 
 import com.moldavets.microservices.report_generator_service.exception.ConvertImageException;
 import com.moldavets.microservices.report_generator_service.service.ImageGeneratorService;
+import lombok.extern.slf4j.Slf4j;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
@@ -17,6 +18,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Map;
 
+@Slf4j
 @Service
 public class ImageGeneratorServiceImpl implements ImageGeneratorService {
 
@@ -50,6 +52,7 @@ public class ImageGeneratorServiceImpl implements ImageGeneratorService {
             ChartUtilities.writeChartAsPNG(outputStream, barChart, 1920, 1080);
             return outputStream.toByteArray();
         } catch (IOException e) {
+            log.error("IN ImageGeneratorServiceImpl.getImageAsByteArray(): ConvertImageException");
             throw new ConvertImageException(e.getMessage());
         }
     }

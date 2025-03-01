@@ -3,6 +3,7 @@ package com.moldavets.microservices.job_parser_service.service.Impl;
 import com.moldavets.microservices.job_parser_service.entity.SkillStat;
 import com.moldavets.microservices.job_parser_service.repository.SkillStatRepository;
 import com.moldavets.microservices.job_parser_service.service.SkillStatService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
+@Slf4j
 public class SkillStatServiceImpl implements SkillStatService {
 
     private SkillStatRepository skillStatRepository;
@@ -37,6 +39,7 @@ public class SkillStatServiceImpl implements SkillStatService {
 
             if(tempSkillStat != null) {
                 skillStatRepository.update(tempSkillStat.getId(), entry.getValue(), today);
+                log.info("IN SkillStatServiceImpl.saveAll(): {} {} {} successfully saved", tempSkillStat.getId(), entry.getValue(), today);
             } else {
                 SkillStat skillStat = SkillStat.builder()
                         .skillName(entry.getKey())
@@ -45,8 +48,8 @@ public class SkillStatServiceImpl implements SkillStatService {
                         .tech(tech)
                         .level(level)
                         .build();
-
                 skillStatRepository.save(skillStat);
+                log.info("IN SkillStatServiceImpl.saveAll(): " + skillStat + " successfully saved");
             }
         }
     }

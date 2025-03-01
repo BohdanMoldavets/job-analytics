@@ -1,0 +1,55 @@
+14:00:34.863 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.2.Final 
+14:00:34.910 [restartedMain] INFO  c.m.m.a.ApiGatewayApplication - Starting ApiGatewayApplication using Java 21.0.5 with PID 7860 (C:\Users\steam\IdeaProjects\job-analytics\services\api-gateway\target\classes started by steam in C:\Users\steam\IdeaProjects\job-analytics\services\api-gateway) 
+14:00:34.911 [restartedMain] INFO  c.m.m.a.ApiGatewayApplication - No active profile set, falling back to 1 default profile: "default" 
+14:00:34.945 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable 
+14:00:34.945 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG' 
+14:00:35.848 [restartedMain] INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=c1793d03-4245-35db-a2bd-8ade75b3a2f2 
+14:00:36.493 [restartedMain] INFO  o.s.c.g.r.RouteDefinitionRouteLocator - Loaded RoutePredicateFactory [After] 
+14:00:36.493 [restartedMain] INFO  o.s.c.g.r.RouteDefinitionRouteLocator - Loaded RoutePredicateFactory [Before] 
+14:00:36.493 [restartedMain] INFO  o.s.c.g.r.RouteDefinitionRouteLocator - Loaded RoutePredicateFactory [Between] 
+14:00:36.493 [restartedMain] INFO  o.s.c.g.r.RouteDefinitionRouteLocator - Loaded RoutePredicateFactory [Cookie] 
+14:00:36.493 [restartedMain] INFO  o.s.c.g.r.RouteDefinitionRouteLocator - Loaded RoutePredicateFactory [Header] 
+14:00:36.493 [restartedMain] INFO  o.s.c.g.r.RouteDefinitionRouteLocator - Loaded RoutePredicateFactory [Host] 
+14:00:36.493 [restartedMain] INFO  o.s.c.g.r.RouteDefinitionRouteLocator - Loaded RoutePredicateFactory [Method] 
+14:00:36.493 [restartedMain] INFO  o.s.c.g.r.RouteDefinitionRouteLocator - Loaded RoutePredicateFactory [Path] 
+14:00:36.493 [restartedMain] INFO  o.s.c.g.r.RouteDefinitionRouteLocator - Loaded RoutePredicateFactory [Query] 
+14:00:36.493 [restartedMain] INFO  o.s.c.g.r.RouteDefinitionRouteLocator - Loaded RoutePredicateFactory [ReadBody] 
+14:00:36.493 [restartedMain] INFO  o.s.c.g.r.RouteDefinitionRouteLocator - Loaded RoutePredicateFactory [RemoteAddr] 
+14:00:36.493 [restartedMain] INFO  o.s.c.g.r.RouteDefinitionRouteLocator - Loaded RoutePredicateFactory [XForwardedRemoteAddr] 
+14:00:36.493 [restartedMain] INFO  o.s.c.g.r.RouteDefinitionRouteLocator - Loaded RoutePredicateFactory [Weight] 
+14:00:36.493 [restartedMain] INFO  o.s.c.g.r.RouteDefinitionRouteLocator - Loaded RoutePredicateFactory [CloudFoundryRouteService] 
+14:00:36.697 [restartedMain] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator' 
+14:00:36.877 [restartedMain] WARN  o.s.b.d.a.OptionalLiveReloadServer - Unable to start LiveReload server 
+14:00:36.885 [restartedMain] INFO  o.s.c.n.e.c.DiscoveryClientOptionalArgsConfiguration - Eureka HTTP Client uses RestTemplate. 
+14:00:36.904 [restartedMain] WARN  o.s.c.l.c.LoadBalancerCacheAutoConfiguration$LoadBalancerCaffeineWarnLogger - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath. 
+14:00:36.952 [restartedMain] INFO  o.s.c.n.eureka.InstanceInfoFactory - Setting initial instance status as: STARTING 
+14:00:36.969 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Initializing Eureka in region us-east-1 
+14:00:36.972 [restartedMain] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration 
+14:00:36.978 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Disable delta property : false 
+14:00:36.979 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Single vip registry refresh property : null 
+14:00:36.979 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Force full registry fetch : false 
+14:00:36.979 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Application is null : false 
+14:00:36.979 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Registered Applications size is zero : true 
+14:00:36.979 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Application version is -1: true 
+14:00:36.979 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Getting all instance registry info from the eureka server 
+14:00:37.246 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - The response status is 200 
+14:00:37.247 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Starting heartbeat executor: renew interval is: 30 
+14:00:37.249 [restartedMain] INFO  c.n.discovery.InstanceInfoReplicator - InstanceInfoReplicator onDemand update allowed rate per min is 4 
+14:00:37.250 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Discovery Client initialized at timestamp 1740834037250 with initial instances count: 1 
+14:00:37.253 [restartedMain] INFO  o.s.c.n.e.s.EurekaServiceRegistry - Registering application API-GATEWAY with eureka with status UP 
+14:00:37.253 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1740834037253, current=UP, previous=STARTING] 
+14:00:37.255 [DiscoveryClient-InstanceInfoReplicator-%d] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_API-GATEWAY/host.docker.internal:api-gateway:8765: registering service... 
+14:00:37.284 [DiscoveryClient-InstanceInfoReplicator-%d] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_API-GATEWAY/host.docker.internal:api-gateway:8765 - registration status: 204 
+14:00:37.362 [restartedMain] INFO  o.s.b.w.e.netty.NettyWebServer - Netty started on port 8765 (http) 
+14:00:37.363 [restartedMain] INFO  o.s.c.n.e.s.EurekaAutoServiceRegistration - Updating port to 8765 
+14:00:37.379 [restartedMain] INFO  c.m.m.a.ApiGatewayApplication - Started ApiGatewayApplication in 2.763 seconds (process running for 3.569) 
+14:00:56.762 [SpringApplicationShutdownHook] INFO  o.s.c.n.e.s.EurekaServiceRegistry - Unregistering application API-GATEWAY with eureka with status DOWN 
+14:00:56.762 [SpringApplicationShutdownHook] INFO  c.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1740834056762, current=DOWN, previous=UP] 
+14:00:56.762 [DiscoveryClient-InstanceInfoReplicator-%d] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_API-GATEWAY/host.docker.internal:api-gateway:8765: registering service... 
+14:00:56.765 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.netty.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete 
+14:00:56.766 [netty-shutdown] INFO  o.s.b.w.e.netty.GracefulShutdown - Graceful shutdown complete 
+14:00:56.772 [DiscoveryClient-InstanceInfoReplicator-%d] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_API-GATEWAY/host.docker.internal:api-gateway:8765 - registration status: 204 
+14:00:56.779 [SpringApplicationShutdownHook] INFO  c.netflix.discovery.DiscoveryClient - Shutting down DiscoveryClient ... 
+14:00:59.789 [SpringApplicationShutdownHook] INFO  c.netflix.discovery.DiscoveryClient - Unregistering ... 
+14:00:59.805 [SpringApplicationShutdownHook] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_API-GATEWAY/host.docker.internal:api-gateway:8765 - deregister  status: 200 
+14:00:59.806 [SpringApplicationShutdownHook] INFO  c.netflix.discovery.DiscoveryClient - Completed shut down of DiscoveryClient 

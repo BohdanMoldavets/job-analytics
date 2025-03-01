@@ -15,6 +15,7 @@ import java.time.LocalDate;
 @Builder
 @Getter
 @Setter
+@ToString
 public class SkillStat {
 
     @Id
