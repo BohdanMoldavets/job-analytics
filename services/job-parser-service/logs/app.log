@@ -1,0 +1,135 @@
+13:56:44.874 [restartedMain] INFO  c.m.m.j.JobParserServiceApplication - Starting JobParserServiceApplication using Java 21.0.5 with PID 12400 (C:\Users\steam\IdeaProjects\job-analytics\services\job-parser-service\target\classes started by steam in C:\Users\steam\IdeaProjects\job-analytics\services\job-parser-service) 
+13:56:44.875 [restartedMain] INFO  c.m.m.j.JobParserServiceApplication - No active profile set, falling back to 1 default profile: "default" 
+13:56:44.910 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable 
+13:56:44.910 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG' 
+13:56:45.849 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode. 
+13:56:45.978 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 122 ms. Found 1 JPA repository interface. 
+13:56:46.259 [restartedMain] INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=b99f48df-dc96-3890-9896-0cf6ba0c9469 
+13:56:46.966 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8000 (http) 
+13:56:46.976 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8000"] 
+13:56:46.978 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat] 
+13:56:46.978 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.36] 
+13:56:47.027 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext 
+13:56:47.028 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2117 ms 
+13:56:47.468 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default] 
+13:56:47.510 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.8.Final 
+13:56:47.536 [restartedMain] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled 
+13:56:47.761 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer 
+13:56:47.788 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting... 
+13:56:47.951 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:testdb user=SA 
+13:56:47.952 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed. 
+13:56:47.999 [restartedMain] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown 
+13:56:48.627 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration) 
+13:56:48.675 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default' 
+13:56:48.965 [restartedMain] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used. 
+13:56:49.763 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning 
+13:56:51.312 [restartedMain] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:testdb' 
+13:56:51.416 [restartedMain] WARN  o.s.b.d.a.OptionalLiveReloadServer - Unable to start LiveReload server 
+13:56:51.492 [restartedMain] INFO  o.s.c.n.e.c.DiscoveryClientOptionalArgsConfiguration - Eureka HTTP Client uses RestTemplate. 
+13:56:51.603 [restartedMain] WARN  o.s.c.l.c.LoadBalancerCacheAutoConfiguration$LoadBalancerCaffeineWarnLogger - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath. 
+13:56:51.621 [restartedMain] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator' 
+13:56:51.721 [restartedMain] INFO  o.s.c.n.eureka.InstanceInfoFactory - Setting initial instance status as: STARTING 
+13:56:51.743 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Initializing Eureka in region us-east-1 
+13:56:51.746 [restartedMain] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration 
+13:56:51.753 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Disable delta property : false 
+13:56:51.753 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Single vip registry refresh property : null 
+13:56:51.753 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Force full registry fetch : false 
+13:56:51.753 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Application is null : false 
+13:56:51.753 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Registered Applications size is zero : true 
+13:56:51.753 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Application version is -1: true 
+13:56:51.753 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Getting all instance registry info from the eureka server 
+13:56:52.033 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - The response status is 200 
+13:56:52.035 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Starting heartbeat executor: renew interval is: 30 
+13:56:52.036 [restartedMain] INFO  c.n.discovery.InstanceInfoReplicator - InstanceInfoReplicator onDemand update allowed rate per min is 4 
+13:56:52.037 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Discovery Client initialized at timestamp 1740833812037 with initial instances count: 0 
+13:56:52.051 [restartedMain] INFO  o.s.c.n.e.s.EurekaServiceRegistry - Registering application JOB-PARSER-SERVICE with eureka with status UP 
+13:56:52.052 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1740833812052, current=UP, previous=STARTING] 
+13:56:52.053 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8000"] 
+13:56:52.053 [DiscoveryClient-InstanceInfoReplicator-%d] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_JOB-PARSER-SERVICE/host.docker.internal:job-parser-service:8000: registering service... 
+13:56:52.071 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8000 (http) with context path '/' 
+13:56:52.072 [restartedMain] INFO  o.s.c.n.e.s.EurekaAutoServiceRegistration - Updating port to 8000 
+13:56:52.090 [restartedMain] INFO  c.m.m.j.JobParserServiceApplication - Started JobParserServiceApplication in 7.528 seconds (process running for 8.379) 
+13:56:52.090 [DiscoveryClient-InstanceInfoReplicator-%d] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_JOB-PARSER-SERVICE/host.docker.internal:job-parser-service:8000 - registration status: 204 
+13:56:52.376 [RMI TCP Connection(2)-172.25.176.1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet' 
+13:56:52.376 [RMI TCP Connection(2)-172.25.176.1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet' 
+13:56:52.378 [RMI TCP Connection(2)-172.25.176.1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms 
+13:57:05.961 [http-nio-8000-exec-1] INFO  c.m.m.j.s.Impl.JobScraperServiceImpl - IN JobScraperServiceImpl.getUrlWithParams(): result - https://justjoin.it/job-offers/all-locations/java?experience-level=junior 
+13:57:09.213 [http-nio-8000-exec-1] INFO  c.m.m.j.s.Impl.JobScraperServiceImpl - IN JobScraperServiceImpl.getJobLinks(): result - [/job-offer/samsung-r-d-institute-poland-internship---compiler-project-int-warszawa-java, /job-offer/britenet-salesforce-developer---force-academy-lublin-java, /job-offer/finanteq-junior-full-stack-developer-java-i-react--lublin-java-70baf288, /job-offer/enxoo-junior-salesforce-consultant-warszawa-java, /job-offer/antologic-paid-java-internship-wroclaw-java, /job-offer/sparta-loyalty-junior-java-developer-krakow-java, /job-offer/netcompany-junior-java-developer-warszawa-java, /job-offer/devapo-junior-software-engineer-warszawa-java, /job-offer/link-group-junior-java-kotlin-developer-warszawa-java, /job-offer/cae-flight-services-poland-java-qa-software-engineer-intern-at-cae-flight-services-krakow-java, /job-offer/visa-graduate-software-engineer-warszawa-java-6576cd62, /job-offer/visa-software-engineer-traineeship-warszawa-java, /job-offer/reply-polska-sp-z-o-o--junior-fullstack-developer-katowice-java, /job-offer/avsystem-internship-at-avsystem-krakow-java] 
+13:57:10.081 [http-nio-8000-exec-1] INFO  c.m.m.j.s.Impl.JobScraperServiceImpl - IN JobScraperServiceImpl.getSkills(): result - [Java/Kotlin, Go, C/C++, Open source, C++, C] 
+13:57:11.127 [http-nio-8000-exec-1] INFO  c.m.m.j.s.Impl.JobScraperServiceImpl - IN JobScraperServiceImpl.getSkills(): result - [English, Java, SQL, JavaScript, CSS/HTML] 
+13:57:11.711 [http-nio-8000-exec-1] INFO  c.m.m.j.s.Impl.JobScraperServiceImpl - IN JobScraperServiceImpl.getSkills(): result - [REST, React, Java, Spring Boot, Kubernetes] 
+13:57:12.548 [http-nio-8000-exec-1] INFO  c.m.m.j.s.Impl.JobScraperServiceImpl - IN JobScraperServiceImpl.getSkills(): result - [Salesforce, BPMN, Business Analysis] 
+13:57:13.044 [http-nio-8000-exec-1] INFO  c.m.m.j.s.Impl.JobScraperServiceImpl - IN JobScraperServiceImpl.getSkills(): result - [Communication Skills, Proactivity, English, Team Player, Java, Git, Hibernate, Spring] 
+13:57:13.675 [http-nio-8000-exec-1] INFO  c.m.m.j.s.Impl.JobScraperServiceImpl - IN JobScraperServiceImpl.getSkills(): result - [Java, MongoDB, Spring Boot, Git, Groovy] 
+13:57:14.308 [http-nio-8000-exec-1] INFO  c.m.m.j.s.Impl.JobScraperServiceImpl - IN JobScraperServiceImpl.getSkills(): result - [English, Databases, Java, SQL, Spring] 
+13:57:15.049 [http-nio-8000-exec-1] INFO  c.m.m.j.s.Impl.JobScraperServiceImpl - IN JobScraperServiceImpl.getSkills(): result - [Jenkins, Docker, Java / Spring, Kubernetes, Azure, GCP, BPM] 
+13:57:15.604 [http-nio-8000-exec-1] INFO  c.m.m.j.s.Impl.JobScraperServiceImpl - IN JobScraperServiceImpl.getSkills(): result - [Java, Kotlin, Python, PHP, Node.js, PostgreSQL, MySQL, MongoDB, CI/CD] 
+13:57:17.494 [http-nio-8000-exec-1] INFO  c.m.m.j.s.Impl.JobScraperServiceImpl - IN JobScraperServiceImpl.getSkills(): result - [QA, Java, SQL, Oracle SQL, QA Automation] 
+13:57:18.146 [http-nio-8000-exec-1] INFO  c.m.m.j.s.Impl.JobScraperServiceImpl - IN JobScraperServiceImpl.getSkills(): result - [Java] 
+13:57:18.803 [http-nio-8000-exec-1] INFO  c.m.m.j.s.Impl.JobScraperServiceImpl - IN JobScraperServiceImpl.getSkills(): result - [Java] 
+13:57:19.482 [http-nio-8000-exec-1] INFO  c.m.m.j.s.Impl.JobScraperServiceImpl - IN JobScraperServiceImpl.getSkills(): result - [Java, Spring Batch, React] 
+13:57:20.019 [http-nio-8000-exec-1] INFO  c.m.m.j.s.Impl.JobScraperServiceImpl - IN JobScraperServiceImpl.getSkills(): result - [Linux, Scala, Java, TypeScript] 
+13:57:20.019 [http-nio-8000-exec-1] INFO  c.m.m.j.s.Impl.JobScraperServiceImpl - IN JobScraperServiceImpl.parse(): result - {Java / Spring=1, C=1, Oracle SQL=1, PostgreSQL=1, Go=1, Spring Boot=2, Groovy=1, Business Analysis=1, QA=1, TypeScript=1, Java/Kotlin=1, C/C++=1, Databases=1, Docker=1, JavaScript=1, MySQL=1, PHP=1, Open source=1, Spring Batch=1, Salesforce=1, Python=1, Java=11, C++=1, Hibernate=1, Azure=1, Scala=1, Node.js=1, Spring=2, React=2, SQL=3, Kotlin=1, BPMN=1, Jenkins=1, English=3, Communication Skills=1, REST=1, Git=2, Linux=1, GCP=1, Proactivity=1, CI/CD=1, CSS/HTML=1, Team Player=1, MongoDB=2, QA Automation=1, BPM=1, Kubernetes=2} 
+13:57:20.056 [http-nio-8000-exec-1] INFO  c.m.m.j.s.Impl.SkillStatServiceImpl - IN SkillStatServiceImpl.saveAll(): SkillStat(id=1, skillName=Java / Spring, count=1, tech=java, level=junior, lastUpdate=2025-03-01) successfully saved 
+13:57:20.063 [http-nio-8000-exec-1] INFO  c.m.m.j.s.Impl.SkillStatServiceImpl - IN SkillStatServiceImpl.saveAll(): SkillStat(id=2, skillName=C, count=1, tech=java, level=junior, lastUpdate=2025-03-01) successfully saved 
+13:57:20.064 [http-nio-8000-exec-1] INFO  c.m.m.j.s.Impl.SkillStatServiceImpl - IN SkillStatServiceImpl.saveAll(): SkillStat(id=3, skillName=Oracle SQL, count=1, tech=java, level=junior, lastUpdate=2025-03-01) successfully saved 
+13:57:20.066 [http-nio-8000-exec-1] INFO  c.m.m.j.s.Impl.SkillStatServiceImpl - IN SkillStatServiceImpl.saveAll(): SkillStat(id=4, skillName=PostgreSQL, count=1, tech=java, level=junior, lastUpdate=2025-03-01) successfully saved 
+13:57:20.068 [http-nio-8000-exec-1] INFO  c.m.m.j.s.Impl.SkillStatServiceImpl - IN SkillStatServiceImpl.saveAll(): SkillStat(id=5, skillName=Go, count=1, tech=java, level=junior, lastUpdate=2025-03-01) successfully saved 
+13:57:20.069 [http-nio-8000-exec-1] INFO  c.m.m.j.s.Impl.SkillStatServiceImpl - IN SkillStatServiceImpl.saveAll(): SkillStat(id=6, skillName=Spring Boot, count=2, tech=java, level=junior, lastUpdate=2025-03-01) successfully saved 
+13:57:20.070 [http-nio-8000-exec-1] INFO  c.m.m.j.s.Impl.SkillStatServiceImpl - IN SkillStatServiceImpl.saveAll(): SkillStat(id=7, skillName=Groovy, count=1, tech=java, level=junior, lastUpdate=2025-03-01) successfully saved 
+13:57:20.072 [http-nio-8000-exec-1] INFO  c.m.m.j.s.Impl.SkillStatServiceImpl - IN SkillStatServiceImpl.saveAll(): SkillStat(id=8, skillName=Business Analysis, count=1, tech=java, level=junior, lastUpdate=2025-03-01) successfully saved 
+13:57:20.073 [http-nio-8000-exec-1] INFO  c.m.m.j.s.Impl.SkillStatServiceImpl - IN SkillStatServiceImpl.saveAll(): SkillStat(id=9, skillName=QA, count=1, tech=java, level=junior, lastUpdate=2025-03-01) successfully saved 
+13:57:20.075 [http-nio-8000-exec-1] INFO  c.m.m.j.s.Impl.SkillStatServiceImpl - IN SkillStatServiceImpl.saveAll(): SkillStat(id=10, skillName=TypeScript, count=1, tech=java, level=junior, lastUpdate=2025-03-01) successfully saved 
+13:57:20.077 [http-nio-8000-exec-1] INFO  c.m.m.j.s.Impl.SkillStatServiceImpl - IN SkillStatServiceImpl.saveAll(): SkillStat(id=11, skillName=Java/Kotlin, count=1, tech=java, level=junior, lastUpdate=2025-03-01) successfully saved 
+13:57:20.080 [http-nio-8000-exec-1] INFO  c.m.m.j.s.Impl.SkillStatServiceImpl - IN SkillStatServiceImpl.saveAll(): SkillStat(id=12, skillName=C/C++, count=1, tech=java, level=junior, lastUpdate=2025-03-01) successfully saved 
+13:57:20.081 [http-nio-8000-exec-1] INFO  c.m.m.j.s.Impl.SkillStatServiceImpl - IN SkillStatServiceImpl.saveAll(): SkillStat(id=13, skillName=Databases, count=1, tech=java, level=junior, lastUpdate=2025-03-01) successfully saved 
+13:57:20.083 [http-nio-8000-exec-1] INFO  c.m.m.j.s.Impl.SkillStatServiceImpl - IN SkillStatServiceImpl.saveAll(): SkillStat(id=14, skillName=Docker, count=1, tech=java, level=junior, lastUpdate=2025-03-01) successfully saved 
+13:57:20.085 [http-nio-8000-exec-1] INFO  c.m.m.j.s.Impl.SkillStatServiceImpl - IN SkillStatServiceImpl.saveAll(): SkillStat(id=15, skillName=JavaScript, count=1, tech=java, level=junior, lastUpdate=2025-03-01) successfully saved 
+13:57:20.087 [http-nio-8000-exec-1] INFO  c.m.m.j.s.Impl.SkillStatServiceImpl - IN SkillStatServiceImpl.saveAll(): SkillStat(id=16, skillName=MySQL, count=1, tech=java, level=junior, lastUpdate=2025-03-01) successfully saved 
+13:57:20.089 [http-nio-8000-exec-1] INFO  c.m.m.j.s.Impl.SkillStatServiceImpl - IN SkillStatServiceImpl.saveAll(): SkillStat(id=17, skillName=PHP, count=1, tech=java, level=junior, lastUpdate=2025-03-01) successfully saved 
+13:57:20.091 [http-nio-8000-exec-1] INFO  c.m.m.j.s.Impl.SkillStatServiceImpl - IN SkillStatServiceImpl.saveAll(): SkillStat(id=18, skillName=Open source, count=1, tech=java, level=junior, lastUpdate=2025-03-01) successfully saved 
+13:57:20.092 [http-nio-8000-exec-1] INFO  c.m.m.j.s.Impl.SkillStatServiceImpl - IN SkillStatServiceImpl.saveAll(): SkillStat(id=19, skillName=Spring Batch, count=1, tech=java, level=junior, lastUpdate=2025-03-01) successfully saved 
+13:57:20.095 [http-nio-8000-exec-1] INFO  c.m.m.j.s.Impl.SkillStatServiceImpl - IN SkillStatServiceImpl.saveAll(): SkillStat(id=20, skillName=Salesforce, count=1, tech=java, level=junior, lastUpdate=2025-03-01) successfully saved 
+13:57:20.096 [http-nio-8000-exec-1] INFO  c.m.m.j.s.Impl.SkillStatServiceImpl - IN SkillStatServiceImpl.saveAll(): SkillStat(id=21, skillName=Python, count=1, tech=java, level=junior, lastUpdate=2025-03-01) successfully saved 
+13:57:20.098 [http-nio-8000-exec-1] INFO  c.m.m.j.s.Impl.SkillStatServiceImpl - IN SkillStatServiceImpl.saveAll(): SkillStat(id=22, skillName=Java, count=11, tech=java, level=junior, lastUpdate=2025-03-01) successfully saved 
+13:57:20.100 [http-nio-8000-exec-1] INFO  c.m.m.j.s.Impl.SkillStatServiceImpl - IN SkillStatServiceImpl.saveAll(): SkillStat(id=23, skillName=C++, count=1, tech=java, level=junior, lastUpdate=2025-03-01) successfully saved 
+13:57:20.102 [http-nio-8000-exec-1] INFO  c.m.m.j.s.Impl.SkillStatServiceImpl - IN SkillStatServiceImpl.saveAll(): SkillStat(id=24, skillName=Hibernate, count=1, tech=java, level=junior, lastUpdate=2025-03-01) successfully saved 
+13:57:20.104 [http-nio-8000-exec-1] INFO  c.m.m.j.s.Impl.SkillStatServiceImpl - IN SkillStatServiceImpl.saveAll(): SkillStat(id=25, skillName=Azure, count=1, tech=java, level=junior, lastUpdate=2025-03-01) successfully saved 
+13:57:20.106 [http-nio-8000-exec-1] INFO  c.m.m.j.s.Impl.SkillStatServiceImpl - IN SkillStatServiceImpl.saveAll(): SkillStat(id=26, skillName=Scala, count=1, tech=java, level=junior, lastUpdate=2025-03-01) successfully saved 
+13:57:20.107 [http-nio-8000-exec-1] INFO  c.m.m.j.s.Impl.SkillStatServiceImpl - IN SkillStatServiceImpl.saveAll(): SkillStat(id=27, skillName=Node.js, count=1, tech=java, level=junior, lastUpdate=2025-03-01) successfully saved 
+13:57:20.109 [http-nio-8000-exec-1] INFO  c.m.m.j.s.Impl.SkillStatServiceImpl - IN SkillStatServiceImpl.saveAll(): SkillStat(id=28, skillName=Spring, count=2, tech=java, level=junior, lastUpdate=2025-03-01) successfully saved 
+13:57:20.111 [http-nio-8000-exec-1] INFO  c.m.m.j.s.Impl.SkillStatServiceImpl - IN SkillStatServiceImpl.saveAll(): SkillStat(id=29, skillName=React, count=2, tech=java, level=junior, lastUpdate=2025-03-01) successfully saved 
+13:57:20.113 [http-nio-8000-exec-1] INFO  c.m.m.j.s.Impl.SkillStatServiceImpl - IN SkillStatServiceImpl.saveAll(): SkillStat(id=30, skillName=SQL, count=3, tech=java, level=junior, lastUpdate=2025-03-01) successfully saved 
+13:57:20.114 [http-nio-8000-exec-1] INFO  c.m.m.j.s.Impl.SkillStatServiceImpl - IN SkillStatServiceImpl.saveAll(): SkillStat(id=31, skillName=Kotlin, count=1, tech=java, level=junior, lastUpdate=2025-03-01) successfully saved 
+13:57:20.116 [http-nio-8000-exec-1] INFO  c.m.m.j.s.Impl.SkillStatServiceImpl - IN SkillStatServiceImpl.saveAll(): SkillStat(id=32, skillName=BPMN, count=1, tech=java, level=junior, lastUpdate=2025-03-01) successfully saved 
+13:57:20.118 [http-nio-8000-exec-1] INFO  c.m.m.j.s.Impl.SkillStatServiceImpl - IN SkillStatServiceImpl.saveAll(): SkillStat(id=33, skillName=Jenkins, count=1, tech=java, level=junior, lastUpdate=2025-03-01) successfully saved 
+13:57:20.120 [http-nio-8000-exec-1] INFO  c.m.m.j.s.Impl.SkillStatServiceImpl - IN SkillStatServiceImpl.saveAll(): SkillStat(id=34, skillName=English, count=3, tech=java, level=junior, lastUpdate=2025-03-01) successfully saved 
+13:57:20.122 [http-nio-8000-exec-1] INFO  c.m.m.j.s.Impl.SkillStatServiceImpl - IN SkillStatServiceImpl.saveAll(): SkillStat(id=35, skillName=Communication Skills, count=1, tech=java, level=junior, lastUpdate=2025-03-01) successfully saved 
+13:57:20.123 [http-nio-8000-exec-1] INFO  c.m.m.j.s.Impl.SkillStatServiceImpl - IN SkillStatServiceImpl.saveAll(): SkillStat(id=36, skillName=REST, count=1, tech=java, level=junior, lastUpdate=2025-03-01) successfully saved 
+13:57:20.125 [http-nio-8000-exec-1] INFO  c.m.m.j.s.Impl.SkillStatServiceImpl - IN SkillStatServiceImpl.saveAll(): SkillStat(id=37, skillName=Git, count=2, tech=java, level=junior, lastUpdate=2025-03-01) successfully saved 
+13:57:20.127 [http-nio-8000-exec-1] INFO  c.m.m.j.s.Impl.SkillStatServiceImpl - IN SkillStatServiceImpl.saveAll(): SkillStat(id=38, skillName=Linux, count=1, tech=java, level=junior, lastUpdate=2025-03-01) successfully saved 
+13:57:20.128 [http-nio-8000-exec-1] INFO  c.m.m.j.s.Impl.SkillStatServiceImpl - IN SkillStatServiceImpl.saveAll(): SkillStat(id=39, skillName=GCP, count=1, tech=java, level=junior, lastUpdate=2025-03-01) successfully saved 
+13:57:20.129 [http-nio-8000-exec-1] INFO  c.m.m.j.s.Impl.SkillStatServiceImpl - IN SkillStatServiceImpl.saveAll(): SkillStat(id=40, skillName=Proactivity, count=1, tech=java, level=junior, lastUpdate=2025-03-01) successfully saved 
+13:57:20.130 [http-nio-8000-exec-1] INFO  c.m.m.j.s.Impl.SkillStatServiceImpl - IN SkillStatServiceImpl.saveAll(): SkillStat(id=41, skillName=CI/CD, count=1, tech=java, level=junior, lastUpdate=2025-03-01) successfully saved 
+13:57:20.133 [http-nio-8000-exec-1] INFO  c.m.m.j.s.Impl.SkillStatServiceImpl - IN SkillStatServiceImpl.saveAll(): SkillStat(id=42, skillName=CSS/HTML, count=1, tech=java, level=junior, lastUpdate=2025-03-01) successfully saved 
+13:57:20.135 [http-nio-8000-exec-1] INFO  c.m.m.j.s.Impl.SkillStatServiceImpl - IN SkillStatServiceImpl.saveAll(): SkillStat(id=43, skillName=Team Player, count=1, tech=java, level=junior, lastUpdate=2025-03-01) successfully saved 
+13:57:20.137 [http-nio-8000-exec-1] INFO  c.m.m.j.s.Impl.SkillStatServiceImpl - IN SkillStatServiceImpl.saveAll(): SkillStat(id=44, skillName=MongoDB, count=2, tech=java, level=junior, lastUpdate=2025-03-01) successfully saved 
+13:57:20.138 [http-nio-8000-exec-1] INFO  c.m.m.j.s.Impl.SkillStatServiceImpl - IN SkillStatServiceImpl.saveAll(): SkillStat(id=45, skillName=QA Automation, count=1, tech=java, level=junior, lastUpdate=2025-03-01) successfully saved 
+13:57:20.140 [http-nio-8000-exec-1] INFO  c.m.m.j.s.Impl.SkillStatServiceImpl - IN SkillStatServiceImpl.saveAll(): SkillStat(id=46, skillName=BPM, count=1, tech=java, level=junior, lastUpdate=2025-03-01) successfully saved 
+13:57:20.142 [http-nio-8000-exec-1] INFO  c.m.m.j.s.Impl.SkillStatServiceImpl - IN SkillStatServiceImpl.saveAll(): SkillStat(id=47, skillName=Kubernetes, count=2, tech=java, level=junior, lastUpdate=2025-03-01) successfully saved 
+13:57:22.042 [DiscoveryClient-CacheRefreshExecutor-%d] INFO  c.netflix.discovery.DiscoveryClient - Disable delta property : false 
+13:57:22.042 [DiscoveryClient-CacheRefreshExecutor-%d] INFO  c.netflix.discovery.DiscoveryClient - Single vip registry refresh property : null 
+13:57:22.042 [DiscoveryClient-CacheRefreshExecutor-%d] INFO  c.netflix.discovery.DiscoveryClient - Force full registry fetch : false 
+13:57:22.042 [DiscoveryClient-CacheRefreshExecutor-%d] INFO  c.netflix.discovery.DiscoveryClient - Application is null : false 
+13:57:22.042 [DiscoveryClient-CacheRefreshExecutor-%d] INFO  c.netflix.discovery.DiscoveryClient - Registered Applications size is zero : true 
+13:57:22.043 [DiscoveryClient-CacheRefreshExecutor-%d] INFO  c.netflix.discovery.DiscoveryClient - Application version is -1: false 
+13:57:22.043 [DiscoveryClient-CacheRefreshExecutor-%d] INFO  c.netflix.discovery.DiscoveryClient - Getting all instance registry info from the eureka server 
+13:57:22.068 [DiscoveryClient-CacheRefreshExecutor-%d] INFO  c.netflix.discovery.DiscoveryClient - The response status is 200 
+13:58:29.573 [http-nio-8000-exec-4] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource raport-generator-service/png/java.] 

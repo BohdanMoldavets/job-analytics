@@ -2,12 +2,14 @@ package com.moldavets.microservices.report_generator_service.mapper.Impl;
 
 import com.moldavets.microservices.report_generator_service.exception.IncorrectJsonFormatException;
 import com.moldavets.microservices.report_generator_service.mapper.SkillMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 @Component
 public class SkillMapperImpl implements SkillMapper {
 
@@ -33,6 +35,7 @@ public class SkillMapperImpl implements SkillMapper {
             }
 
         }
+        log.info("IN SkillMapperImpl.mapSkills(): result - {}", mappedSkills);
         return mappedSkills;
     }
 }

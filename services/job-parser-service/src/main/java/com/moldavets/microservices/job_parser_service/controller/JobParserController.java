@@ -2,19 +2,21 @@ package com.moldavets.microservices.job_parser_service.controller;
 
 import com.moldavets.microservices.job_parser_service.dto.SkillStatDto;
 import com.moldavets.microservices.job_parser_service.entity.SkillStat;
-import com.moldavets.microservices.job_parser_service.exception.LostConnectionException;
 import com.moldavets.microservices.job_parser_service.mapper.SkillStatDtoMapper;
 import com.moldavets.microservices.job_parser_service.service.JobScraperService;
 import com.moldavets.microservices.job_parser_service.service.SkillStatService;
-import io.github.resilience4j.retry.annotation.Retry;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 
+@Slf4j
 @RestController
 @RequestMapping("/job-parser-service")
 public class JobParserController {
@@ -33,7 +35,7 @@ public class JobParserController {
     }
 
     @GetMapping("/{tech}")
-    @Retry(name = "JobParserController", fallbackMethod = "fallbackJobParserController")
+    @CircuitBreaker(name = "JobParserController", fallbackMethod = "fallbackJobParserController")
     public List<SkillStatDto> parseSkills(@PathVariable(value = "tech") String tech,
                                           @RequestParam(value = "level") String level) {
 
@@ -52,8 +54,9 @@ public class JobParserController {
         return skillStatDtoMapper.createSkillStatDtoList(skillStatList);
     }
 
-    private void fallbackJobParserController(Exception e) {
-        throw new LostConnectionException(e.getMessage());
+    private List<SkillStatDto> fallbackJobParserController(String tech, String level, Throwable throwable) {
+        log.error("IN JobParserController.fallbackJobParserController() - something went wrong");
+        return new ArrayList<>();
     }
 
 
