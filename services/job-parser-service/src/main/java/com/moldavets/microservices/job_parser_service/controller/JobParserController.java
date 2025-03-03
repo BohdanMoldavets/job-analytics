@@ -41,7 +41,7 @@ public class JobParserController {
 
         List<SkillStat> skillStatList = skillStatService.getByTechAndLevelAndDate(tech, level, LocalDate.now());
 
-        if(skillStatList.isEmpty()) {
+        if(skillStatList == null || skillStatList.isEmpty()) {
             Map<String, Integer> rateMap = jobScraperService.parse(tech, level);
 
             skillStatService.saveAll(
