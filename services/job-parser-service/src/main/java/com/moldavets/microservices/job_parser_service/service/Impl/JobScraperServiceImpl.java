@@ -24,9 +24,12 @@ import java.util.Map;
 @Service
 @NoArgsConstructor
 public class JobScraperServiceImpl implements JobScraperService {
-    
 
     public Map<String,Integer> parse(String tech, String level) {
+
+        if (tech == null || tech.trim().isEmpty() || level == null || level.trim().isEmpty()) {
+            throw new NullPointerException("Tech or level for getSkills method cannot be null or empty");
+        }
 
         Map<String,Integer> rateMap = new HashMap<>();
 
@@ -44,7 +47,12 @@ public class JobScraperServiceImpl implements JobScraperService {
         return rateMap;
     }
 
-    private List<String> getSkills(String url) {
+    protected List<String> getSkills(String url) {
+
+        if (url == null || url.trim().isEmpty()) {
+            log.warn("IN JobScraperServiceImpl.getSkills(): url is null or empty");
+            throw new NullPointerException("Url for getSkills method cannot be null or empty");
+        }
 
         List<String> jobSkills = new ArrayList<>();
 
@@ -63,7 +71,12 @@ public class JobScraperServiceImpl implements JobScraperService {
         }
     }
 
-    private String getUrlWithParams(String tech, String level) {
+    protected String getUrlWithParams(String tech, String level) {
+
+        if(tech == null || tech.trim().isEmpty() || level == null || level.trim().isEmpty()) {
+            log.warn("IN JobScraperServiceImpl.getUrlWithParams(): tech or level is empty or null");
+            throw new NullPointerException("Tech or level for getUrlWithParams method cannot be null or empty");
+        }
 
         StringBuilder urlBuilder = new StringBuilder();
 
@@ -74,33 +87,32 @@ public class JobScraperServiceImpl implements JobScraperService {
         try {
             TechEnum.valueOf(tech.toUpperCase());
         } catch (IllegalArgumentException e) {
-            log.warn("IN JobScraperServiceImpl.getUrlWithParams: tech {} not found", tech);
+            log.warn("IN JobScraperServiceImpl.getUrlWithParams(): tech {} not found", tech);
             throw new TechNotFoundException(e.getMessage());
         }
 
-        if(level == null) {
-            urlBuilder.append("/")
-               .append(tech);
-        } else {
-            try {
-                LevelEnum.valueOf(level.toUpperCase());
-            } catch (IllegalArgumentException e) {
-                log.warn("IN JobScraperServiceImpl.getUrlWithParams: level {} not found", level);
-                throw new LevelNotFoundException(e.getMessage());
-            }
-
-            urlBuilder.append("/")
-                    .append(tech)
-                    .append("?experience-level=")
-                    .append(level);
+        try {
+            LevelEnum.valueOf(level.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            log.warn("IN JobScraperServiceImpl.getUrlWithParams(): level {} not found", level);
+            throw new LevelNotFoundException(e.getMessage());
         }
+
+        urlBuilder.append("/")
+                .append(tech)
+                .append("?experience-level=")
+                .append(level);
 
         String result = urlBuilder.toString();
         log.info("IN JobScraperServiceImpl.getUrlWithParams(): result - " + result);
         return result;
     }
 
-    private static List<String> getJobLinks(String url) {
+    protected List<String> getJobLinks(String url) {
+        if (url == null || url.trim().isEmpty()) {
+            log.warn("IN JobScraperServiceImpl.getJobLinks(): url is null or empty");
+            throw new NullPointerException("Url for getJobLinks method cannot be null or empty");
+        }
 
         List<String> jobLinks = new ArrayList<>();
 
@@ -109,7 +121,7 @@ public class JobScraperServiceImpl implements JobScraperService {
                     .get()
                     .select("a[href^='/job-offer/']");
 
-            for (int i = 0; i <= elements.size()-1; i++) {
+            for (int i = 0; i <= elements.size() - 1; i++) {
                 jobLinks.add(elements.get(i).attr("href"));
             }
             log.info("IN JobScraperServiceImpl.getJobLinks(): result - " + jobLinks);
