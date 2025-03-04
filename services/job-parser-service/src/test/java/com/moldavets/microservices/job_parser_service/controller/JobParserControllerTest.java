@@ -6,7 +6,6 @@ import com.moldavets.microservices.job_parser_service.mapper.SkillStatDtoMapper;
 import com.moldavets.microservices.job_parser_service.service.Impl.JobScraperServiceImpl;
 import com.moldavets.microservices.job_parser_service.service.Impl.SkillStatServiceImpl;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.mockito.Mockito;
