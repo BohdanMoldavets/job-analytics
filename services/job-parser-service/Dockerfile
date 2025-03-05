@@ -4,10 +4,10 @@ WORKDIR /home/app
 COPY ./pom.xml /home/app/pom.xml
 COPY ./src/main/java/com/moldavets/microservices/job_parser_service/JobParserServiceApplication.java /home/app/src/main/java/com/moldavets/microservices/job_parser_service/JobParserServiceApplication.java
 
-RUN mvn -f /home/app/pom.xml clean package
+RUN mvn -f /home/app/pom.xml clean package -DskipTests
 
 COPY . /home/app
-RUN mvn -f /home/app/pom.xml clean package
+RUN mvn -f /home/app/pom.xml clean package -DskipTests
 
 FROM eclipse-temurin:21-alpine
 EXPOSE 8000

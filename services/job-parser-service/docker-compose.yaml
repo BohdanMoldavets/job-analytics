@@ -1,0 +1,51 @@
+version: '3.7'
+
+volumes:
+  pg_job_skills:
+
+services:
+  jobs-skills-service:
+    build: .
+    restart: always
+    mem_limit: 700M
+    ports:
+      - "8000:8000"
+    depends_on:
+      - jobs-skills-db
+      - load-balancer
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://jobs-skills-db:5432/jobs-skills-database
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: password
+      EUREKA_CLIENT_SERVICE-URL_DEFAULTZONE: http://load-balancer:8761/eureka
+    networks:
+      - job-analytics-network
+
+
+  jobs-skills-db:
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=jobs-skills-database
+    volumes:
+      - pg_job_skills:/var/lib/postgresql/data
+    ports:
+      - "5431:5432"
+    depends_on:
+      - load-balancer
+    networks:
+      - job-analytics-network
+
+
+  load-balancer:
+    image: moldavets/eureka-server
+    restart: always
+    ports:
+      - "8761:8761"
+    networks:
+      - job-analytics-network
+
+networks:
+  job-analytics-network:
