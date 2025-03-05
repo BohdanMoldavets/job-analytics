@@ -38,9 +38,8 @@ services:
     networks:
       - job-analytics-network
 
-
   load-balancer:
-    image: moldavets/eureka-server
+    build: ../eureka-server
     restart: always
     ports:
       - "8761:8761"
