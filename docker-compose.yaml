@@ -1,0 +1,74 @@
+version: '3.7'
+
+volumes:
+  pg_job_skills:
+
+services:
+  jobs-skills-service:
+    build: ./services/job-parser-service
+    restart: always
+    mem_limit: 700M
+    ports:
+      - "8000:8000"
+    depends_on:
+      - jobs-skills-db
+      - eureka-server
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://jobs-skills-db:5432/jobs-skills-database
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: password
+      EUREKA_CLIENT_SERVICE-URL_DEFAULTZONE: http://eureka-server:8761/eureka
+    networks:
+      - job-analytics-network
+
+  report-generator-service:
+    build: ./services/report-generator-service
+    restart: always
+    mem_limit: 700M
+    ports:
+      - "8100:8100"
+    depends_on:
+      - eureka-server
+      - redis-server
+      - jobs-skills-service
+    environment:
+      SPRING_DATA_REDIS_HOST: redis-server
+      SPRING_DATA_REDIS_PORT: 6379
+      EUREKA_CLIENT_SERVICE-URL_DEFAULTZONE: http://eureka-server:8761/eureka
+    networks:
+      - job-analytics-network
+
+  redis-server:
+    container_name: redis-container
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    networks:
+      - job-analytics-network
+
+  jobs-skills-db:
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=jobs-skills-database
+    volumes:
+      - pg_job_skills:/var/lib/postgresql/data
+    ports:
+      - "5431:5432"
+    depends_on:
+      - eureka-server
+    networks:
+      - job-analytics-network
+
+  eureka-server:
+    build: ./services/eureka-server
+    restart: always
+    ports:
+      - "8761:8761"
+    networks:
+      - job-analytics-network
+
+networks:
+  job-analytics-network:

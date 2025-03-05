@@ -5,10 +5,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@FeignClient(name = "job-parser-service", url = "localhost:8000")
+@FeignClient(name = "job-parser-service")
 public interface JobParserProxy {
 
-    @GetMapping("/job-parser-service/{tech}")
+    @GetMapping("/job-parser-service/{tech}") //@GetMapping("/job-parser-service/{tech}")
     String retrieveSkillsJson(
             @PathVariable String tech,
             @RequestParam String level

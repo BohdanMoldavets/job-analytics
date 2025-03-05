@@ -1,0 +1,38 @@
+version: '3.7'
+
+services:
+  report-generator-service:
+    build: .
+    restart: always
+    mem_limit: 700M
+    ports:
+      - "8100:8100"
+    depends_on:
+      - redis-server
+      - load-balancer
+
+    environment:
+      SPRING_DATA_REDIS_HOST: redis-server
+      SPRING_DATA_REDIS_PORT: 6379
+      EUREKA_CLIENT_SERVICE-URL_DEFAULTZONE: http://load-balancer:8761/eureka
+    networks:
+      - job-analytics-network
+
+  redis-server:
+    container_name: redis-container
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    networks:
+      - job-analytics-network
+
+  load-balancer:
+    build: ../eureka-server
+    restart: always
+    ports:
+      - "8761:8761"
+    networks:
+      - job-analytics-network
+
+networks:
+  job-analytics-network:
