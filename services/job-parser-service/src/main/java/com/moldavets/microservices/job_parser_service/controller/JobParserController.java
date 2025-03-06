@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -35,13 +35,14 @@ public class JobParserController {
     }
 
     @GetMapping("/{tech}")
-    @CircuitBreaker(name = "JobParserController", fallbackMethod = "fallbackJobParserController")
+    @CircuitBreaker(name = "JobParserController")
     public List<SkillStatDto> parseSkills(@PathVariable(value = "tech") String tech,
-                                          @RequestParam(value = "level") String level) {
+                                          @RequestParam(value = "level") String level
+    ) {
 
         List<SkillStat> skillStatList = skillStatService.getByTechAndLevelAndDate(tech, level, LocalDate.now());
 
-        if(skillStatList.isEmpty()) {
+        if(skillStatList == null || skillStatList.isEmpty()) {
             Map<String, Integer> rateMap = jobScraperService.parse(tech, level);
 
             skillStatService.saveAll(
@@ -51,13 +52,11 @@ public class JobParserController {
             );
             skillStatList = skillStatService.getByTechAndLevelAndDate(tech, level, LocalDate.now());
         }
-        return skillStatDtoMapper.createSkillStatDtoList(skillStatList);
+
+        List<SkillStatDto> resultSkillsList = skillStatDtoMapper.createSkillStatDtoList(skillStatList);
+
+        return resultSkillsList.stream()
+                .sorted(Comparator.comparingInt(SkillStatDto::getCount).reversed())
+                .toList();
     }
-
-    private List<SkillStatDto> fallbackJobParserController(String tech, String level, Throwable throwable) {
-        log.error("IN JobParserController.fallbackJobParserController() - something went wrong");
-        return new ArrayList<>();
-    }
-
-
 }

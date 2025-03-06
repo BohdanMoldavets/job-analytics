@@ -5,7 +5,7 @@ import com.moldavets.microservices.report_generator_service.mapper.SkillMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,7 +14,7 @@ import java.util.Map;
 public class SkillMapperImpl implements SkillMapper {
 
     public Map<String,Integer> mapSkills (List<Map<String,String>> skills) {
-        Map<String, Integer> mappedSkills = new HashMap<>();
+        Map<String, Integer> mappedSkills = new LinkedHashMap<>(); //hash map
 
         for (Map<String, String> skill : skills) {
             String tempSkill = "";
