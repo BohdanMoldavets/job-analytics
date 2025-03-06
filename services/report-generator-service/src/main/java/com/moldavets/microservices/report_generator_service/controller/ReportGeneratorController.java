@@ -57,8 +57,9 @@ public class ReportGeneratorController {
     }
 
     @GetMapping("/png/{tech}")
-    public ResponseEntity<byte[]> reportGenerator(@PathVariable("tech") String tech,
-                                                  @RequestParam("level") String level) {
+    public ResponseEntity<byte[]> reportGenerator(@PathVariable(value = "tech") String tech,
+                                                  @RequestParam(value = "level") String level
+    ) {
 
         String skillsAnalytics;
         List<Map<String,String>> responseSkills;

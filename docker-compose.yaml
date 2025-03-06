@@ -4,6 +4,28 @@ volumes:
   pg_job_skills:
 
 services:
+
+  eureka-server:
+    build: ./services/eureka-server
+    restart: always
+    ports:
+      - "8761:8761"
+    networks:
+      - job-analytics-network
+
+  api-gateway:
+    build: ./services/api-gateway
+    restart: always
+    mem_limit: 700M
+    ports:
+      - "8765:8765"
+    depends_on:
+      - eureka-server
+    environment:
+      EUREKA_CLIENT_SERVICE-URL_DEFAULTZONE: http://eureka-server:8761/eureka
+    networks:
+      - job-analytics-network
+
   jobs-skills-service:
     build: ./services/job-parser-service
     restart: always
@@ -59,14 +81,6 @@ services:
       - "5431:5432"
     depends_on:
       - eureka-server
-    networks:
-      - job-analytics-network
-
-  eureka-server:
-    build: ./services/eureka-server
-    restart: always
-    ports:
-      - "8761:8761"
     networks:
       - job-analytics-network
 

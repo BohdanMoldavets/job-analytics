@@ -1,4 +1,4 @@
-package com.moldavets.microservices.report_generator_service.service;
+package com.moldavets.microservices.job_parser_service.service;
 
 public interface ScheduledService {
     void scheduledDataCollection();
