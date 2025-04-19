@@ -31,7 +31,7 @@ public class ScheduledServiceImpl implements ScheduledService {
 
     @Override
     @Scheduled(timeUnit = TimeUnit.MINUTES,
-               cron="0 0 1 * * ?" , initialDelay = 0)
+               cron="0 0 1 * * ?")
     public void scheduledDataCollection() {
         log.info("Data collection started");
         for (String tempJob : itJobs) {
